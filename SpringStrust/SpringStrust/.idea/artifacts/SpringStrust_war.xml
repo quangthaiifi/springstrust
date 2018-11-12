@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SpringStrust:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SpringStrust.war">
+      <element id="artifact" artifact-name="SpringStrust:war exploded" />
+    </root>
+  </artifact>
+</component>
