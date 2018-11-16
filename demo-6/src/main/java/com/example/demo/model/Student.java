@@ -1,9 +1,16 @@
 package com.example.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,31 +20,40 @@ public class Student {
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	private Long id;
+	private long id;
 	
 	@Column(name="name")
 	private String name;
 	
 	@Column(name="classid")
-	private String Classid;
+	private String classid;
+
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "student_subject", 
+        joinColumns = { @JoinColumn(name="idStudent")}, 
+        inverseJoinColumns = { @JoinColumn(name = "idsubject") }
+    )
+	Set<Subject> subjects = new HashSet<Subject>();
 
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Student(Long id, String name, String classid) {
+	public Student(long id, String name, String classid, Set<Subject> subjects) {
 		super();
 		this.id = id;
 		this.name = name;
-		Classid = classid;
+		this.classid = classid;
+		this.subjects = subjects;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -50,12 +66,28 @@ public class Student {
 	}
 
 	public String getClassid() {
-		return Classid;
+		return classid;
 	}
 
 	public void setClassid(String classid) {
-		Classid = classid;
+		this.classid = classid;
 	}
+
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(Set<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", classid=" + classid + ", subjects=" + subjects + "]";
+	}
+
+	
+	
 	
 	
 		

@@ -29,8 +29,9 @@ public class StudentSeviceImpl implements StudentSevice {
 
 	@Override
 	public boolean createStudent(Student student) {
+		System.out.println(student);
 		// TODO Auto-generated method stub
-		if(student.getId()!=null) {
+		if(studentRepo.findById(student.getId())!=null) {
 			return false;
 		}else {
 			studentRepo.save(student);
